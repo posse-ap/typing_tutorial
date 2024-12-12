@@ -565,3 +565,213 @@ alert(output);
 </details>
 
 ---
+
+### ◯JavaScriptの基本③
+
+ここからは、JavaScriptとHTMLを連携させて、Webページに動きをつける方法を学びます。
+
+#### HTML要素を取得する
+
+HTMLに以下の要素があるとします。
+
+```html
+<!-- index.html -->
+<p id="example">こんにちは</p>
+```
+
+この要素をJavaScriptで取得するには、`document.getElementById`を使います。
+
+```js
+// script.js
+let element = document.getElementById('example');
+console.log(element);
+```
+
+これは、`example`というIDを持つ要素を取得して、`element`という変数に保存しています。
+
+また、取得した要素のテキストを取得するには、`innerText`プロパティを使います。
+
+```js
+// script.js
+let element = document.getElementById('example');
+console.log(element.innerText);
+```
+
+#### HTML要素を変更する
+
+取得した要素のテキストを変更するには、`innerText`プロパティに新しい値を代入します。
+
+```js
+// script.js
+let element = document.getElementById('example');
+element.innerText = 'こんばんは';
+```
+
+このコードを実行すると、`こんにちは`というテキストが`こんばんは`に変わります。
+
+#### CSSを変更する
+
+要素のスタイルを変更するには、`style`プロパティを使います。
+
+```js
+// script.js
+let element = document.getElementById('example');
+let fontSize = 24;
+element.style.fontSize = `${fontSize}px`;
+```
+
+上のように、フォントサイズなどのスタイルを動的に変更することができます。
+
+また、`classList`プロパティを使うと、CSSのクラスを追加・削除することができとても便利です。
+
+```html
+<!-- index.html -->
+<p id="example" class="hidden">こんにちは</p>
+```
+
+```js
+// script.js
+let element = document.getElementById('example');
+element.classList.remove('hidden'); // hiddenクラスを削除して表示
+element.classList.add('text-red-500', 'font-bold', 'text-2xl'); // 複数のクラスを追加
+```
+
+#### イベントリスナー
+
+イベントリスナーは、ユーザーの操作（クリック、キーボード入力など）に応じて動作するコードを指定する方法です。
+
+JavaScriptでは、`addEventListener`メソッドを使って、イベントリスナーを登録します。
+
+以下のコードは、ボタンがクリックされたときにアラートを表示するプログラムです。
+
+```html
+<!-- index.html -->
+<button id="button" class="p-2 text-white font-bold bg-blue-500 rounded-md shadow-md">クリックしてください</button>
+```
+
+```js
+// script.js
+let button = document.getElementById('button');
+button.addEventListener('click', () => {
+  alert('クリックされました');
+});
+```
+
+イベントリスナーでは、`click`の他にも、`mouseover`（マウスが要素に乗ったとき）、`keydown`（キーボードが押されたとき）など、様々なイベントを指定することができます。
+
+以下は`keydown`イベントを使ったプログラムです。
+
+```html
+<!-- index.html -->
+<input id="input" type="text" class="p-2 border-2" />
+```
+
+```js
+// script.js
+let input = document.getElementById('input');
+input.addEventListener('keydown', (e) => {
+  console.log(e.key);
+  if (e.key === 'Enter') {
+    alert('Enterが押されました');
+  }
+});
+```
+
+このように`e.key`を使うことで、押されたキーの情報を取得することができます。
+
+---
+
+### ◯チェックポイント
+
+HTMLとJavaScriptの両方を使って、タイピングゲームを少し進化させてみましょう！
+
+まずは以下のコードを準備します。
+
+```html
+<!-- index.html -->
+<div class="text-center p-5">
+  <!-- 問題文 -->
+  <p id="question"></p>
+
+  <!-- 入力欄 -->
+  <input id="input" class="border-2 mt-3" />
+</div>
+```
+
+`script.js`を編集して、以下の機能を追加してみましょう。
+
+- 問題を表示する
+- 入力された文字が正解かどうかを判定
+  - 正解の場合は`score`を1増やす
+- 入力欄を空にする
+- これを問題数分繰り返す
+- 最後の問題まで終わったら、スコアをアラートで表示する
+  - 正解数
+  - 不正解数
+  - 正解率 (%)
+
+かなり難易度が上がってきましたが、これまでのチェックポイントなどを参考にして挑戦してみてください！
+
+詰まったら、まずはヒントを見てみてください。
+
+<details>
+<summary>ヒント</summary>
+
+JavaScriptのテンプレートを用意しました！
+
+`// ここに処理を追加`の部分を編集してください。
+
+```js
+// script.js
+let questions = ['apple', 'banana', 'orange', 'grape', 'melon'];
+let input = document.getElementById('input'); // 入力欄
+let questionLabel = document.getElementById('question'); // 問題文
+let index = 0; // 問題の番号
+let score = 0; // 正解数
+
+questionLabel.innerText = questions[index]; // 1つ目の問題を表示
+input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    // ここに処理を追加
+  }
+});
+```
+
+</details>
+
+<details>
+<summary>解答例</summary>
+
+```js
+// script.js
+let questions = ['apple', 'banana', 'orange', 'grape', 'melon'];
+let input = document.getElementById('input'); // 入力欄
+let questionLabel = document.getElementById('question'); // 問題文
+let index = 0; // 問題の番号
+let score = 0; // 正解数
+
+questionLabel.innerText = questions[index]; // 1つ目の問題を表示
+input.addEventListener('keydown', (e) => {
+  // Enterが押されたとき
+  if (e.key === 'Enter') {
+    // 入力された文字が正解かどうか
+    if (input.value === questions[index]) {
+      score++; // 正解数を1増やす
+    }
+    input.value = ''; // 入力欄を空にする
+    index++; // 次の問題へ
+
+    // 問題が残っているかどうか
+    if (index < questions.length) {
+      questionLabel.innerText = questions[index]; // 次の問題を表示
+    } else {
+      let output = `正解数: ${score}
+不正解数: ${questions.length - score}
+正解率: ${(score / questions.length) * 100}%`;
+      alert(output); // スコアを表示
+    }
+  }
+});
+```
+
+</details>
