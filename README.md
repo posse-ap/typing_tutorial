@@ -240,3 +240,328 @@ Tailwind CSSを使えば、テキストや背景、ボーダーに簡単に色�
 ---
 
 ## ■JavaScriptとは
+
+JavaScriptは、Webページに「動き」を加えるためのプログラミング言語です。
+例えば、ボタンを押したらメッセージが表示される、文字が変わる、などの仕組みを作ることができます。
+
+JavaScriptは、ブラウザの中で動いています。特別なアプリをインストールしなくても、みなさんのパソコンやスマートフォンにあるブラウザ（ChromeやSafariなど）で動作します。
+
+今回は、簡単なプログラムを使って、JavaScriptがどのように動いているかを体験してみましょう！
+
+### ◯JavaScriptの基本①
+
+#### メッセージを表示する
+
+まず`script.js`というファイルを開き、以下のコードを追加します。
+
+```js
+alert('Hello, World!');
+```
+
+すると、ページをリロードすると、`Hello, World!`というメッセージが表示されます。
+
+また、`console.log`を使うと、ブラウザの`開発者ツール`の`コンソール`にメッセージを表示することができます。
+
+以下のコードを追加した後、`F12`キーを押して開発者ツールを開き、`コンソール`タブを確認してみましょう。
+
+```js
+console.log('Hello, World!');
+```
+
+![](/images/2024-12-12-16-05-18.png)
+
+#### 変数を使う
+
+変数を使うことで、データを保存しておくことができます。
+
+変数は、`let`を使って宣言します。
+
+```js
+// 文字列を保存する変数
+let message = 'Hello, World!';
+console.log(message);
+```
+
+```js
+// 数値を保存する変数
+let number = 123;
+console.log(number);
+```
+
+また、変数は後から値を変更することができます。
+
+```js
+let message = 'Hello, World!';
+console.log(message);
+
+message = 'Goodbye, World!';
+console.log(message);
+```
+
+#### ユーザーの入力を受け取る
+
+`prompt`を使うと、ユーザーからの入力を受け取ることができます。
+
+```js
+let name = prompt('名前を入力してください');
+console.log(name);
+```
+
+#### 演算
+
+JavaScriptでは、四則演算をはじめ、様々な演算を行うことができます。
+
+```js
+let number = 123;
+console.log(number);
+
+// 数値を1増やす
+// number = number + 1; と同じ
+number += 1;
+console.log(number);
+
+// 数値を2倍にする
+// number = number * 2; と同じ
+number *= 2;
+console.log(number);
+
+// 数値を1減らす
+// number = number - 1; と同じ
+number -= 1;
+console.log(number);
+
+// 数値を半分にする
+// number = number / 2; と同じ
+number /= 2;
+console.log(number);
+```
+
+文字列に`+`演算子を使うと、文字列を連結することができます。
+
+```js
+let message = 'Hello';
+console.log(message);
+
+message += ', World!';
+console.log(message);
+```
+
+#### 複雑な文字列
+
+バッククォート（`）を使うと、複数行の文字列を書くこともできます。
+
+```js
+let message = `こんにちは！
+今日はいい天気ですね。
+`;
+console.log(message);
+```
+
+また、文字列の中に変数を埋め込むこともできます。
+
+```js
+let name = '山田';
+let message = `こんにちは、${name}さん！`;
+console.log(message);
+```
+
+この`${}`の中に変数を入れることで、変数の値を文字列に埋め込むことができます。
+
+また、この中で演算を行うこともできます。
+
+```js
+let price = 100;
+let quantity = 3;
+let message = `単価: ${price}円
+数量: ${quantity}個
+合計: ${price * quantity}円
+`;
+console.log(message);
+```
+
+---
+
+### ◯チェックポイント
+
+ページを開いたら、ユーザーに名前を入力してもらい、入力された名前を表示するプログラムを作ってみましょう。
+
+例えば以下のようになると良いです。
+- 入力された名前: 山田
+- 表示されるメッセージ: こんにちは、山田さん！
+
+<details>
+<summary>解答例</summary>
+
+```js
+let name = prompt('名前を入力してください');
+let message = `こんにちは、${name}さん！`;
+alert(message);
+```
+
+</details>
+
+---
+
+### ◯JavaScriptの基本②
+
+#### 条件分岐
+
+条件分岐を使うことで、特定の条件に応じて処理を変えることができます。
+
+```js
+let age = 20;
+
+if (age >= 20) {
+  console.log('成人です');
+} else {
+  console.log('未成年です');
+}
+```
+
+条件の判定には、以下の演算子(比較演算子)を使います。
+
+- `===`: 等しい
+- `!==`: 等しくない
+- `>`: より大きい
+- `<`: より小さい
+- `>=`: 以上
+- `<=`: 以下
+
+`age`の値を変えて、表示されるメッセージが変わることを確認してみましょう。
+
+文字列の比較を行うこともできます。
+
+```js
+let password = 'password';
+
+if (password === 'password') {
+  console.log('パスワードが一致しました');
+} else {
+  console.log('パスワードが一致しません');
+}
+```
+
+#### ループ処理
+
+ループ処理を使うことで、同じ処理を繰り返すことができます。
+
+```js
+for (let i = 0; i < 5; i++) {
+  console.log(i);
+}
+```
+
+`for`の中身は、以下のようになっています。
+
+- `let i = 0`: 変数`i`を0で初期化
+- `i < 5`: `i`が5未満の間、以下の処理を繰り返す
+- `i++`: 処理が終わるたびに`i`を1増やす
+
+#### 配列
+
+配列を使うことで、複数のデータをまとめて扱うことができます。
+
+```js
+let fruits = ['りんご', 'バナナ', 'みかん'];
+console.log(fruits[0]); // りんご
+console.log(fruits[1]); // バナナ
+console.log(fruits[2]); // みかん
+```
+
+配列の番号(インデックス)は、`0`から始まることに注意してください。
+
+また、配列の要素数は、`length`プロパティで取得できます。
+
+```js
+let fruits = ['りんご', 'バナナ', 'みかん'];
+console.log(fruits.length); // 3
+```
+
+これを使って、`for`ループを使って配列の要素を順番に表示することができます。
+
+```js
+let fruits = ['りんご', 'バナナ', 'みかん'];
+
+for (let i = 0; i < fruits.length; i++) {
+  console.log(fruits[i]);
+}
+```
+
+---
+
+### ◯チェックポイント
+
+ここでは、とてもシンプルなタイピングゲームを作ってみましょう。
+
+ここに果物の一覧があります。
+  
+```js
+let fruits = ['apple', 'banana', 'orange', 'grape', 'melon'];
+```
+
+これらの果物を順番に表示し、ユーザーに入力してもらい、正解かどうかを判定するプログラムを作ってみましょう。
+
+例えば以下のようになると良いです。
+
+- 表示される果物: apple
+- ユーザーの入力: apple
+- 正解の場合: 正解！
+- 不正解の場合: 不正解・・・
+- これを5回繰り返す
+
+これは少し難しいですが、頑張ってみてください！
+
+<details>
+<summary>解答例</summary>
+
+```js
+let fruits = ['apple', 'banana', 'orange', 'grape', 'melon'];
+
+for (let i = 0; i < fruits.length; i++) {
+  let answer = prompt(fruits[i]);
+  if (answer === fruits[i]) {
+    alert('正解！');
+  } else {
+    alert('不正解・・・');
+  }
+}
+```
+
+</details>
+
+もっと難しい問題に挑戦したい方は、正解数をカウントするプログラムに挑戦してみてください！
+
+最後に
+
+- 正解数
+- 不正解数
+- 正解率 (%)
+
+を表示するようにしてみましょう。
+
+<details>
+<summary>解答例</summary>
+
+```js
+let fruits = ['apple', 'banana', 'orange', 'grape', 'melon'];
+let correct = 0;
+
+for (let i = 0; i < fruits.length; i++) {
+  let answer = prompt(fruits[i]);
+  if (answer === fruits[i]) {
+    alert('正解！');
+    correct++;
+  } else {
+    alert('不正解・・・');
+  }
+}
+
+let output = `正解数: ${correct}
+不正解数: ${fruits.length - correct}
+正解率: ${correct / fruits.length * 100}%`;
+alert(output);
+```
+
+</details>
+
+---
