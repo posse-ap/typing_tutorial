@@ -145,6 +145,38 @@ let question = questions[index];
 
 ## 日本語とローマ字を表示する (★★)
 
+配列と`オブジェクト`を組み合わせると、日本語とローマ字の問題を表示することができます。
+
+`オブジェクト`は、キーと値のペアを保持するデータ構造です。
+
+```js
+let question = { ja: 'おにぎり', en: 'onigiri' }; // オブジェクト
+
+console.log(question.ja); // おにぎり
+console.log(question.en); // onigiri
+```
+
+`question.ja`や`question.en`のように、キーを指定することで値を取得できます。
+
+さらに、配列にオブジェクトを格納することで、問題を日本語とローマ字で表示することができるようになります。
+
+```js
+let questions = [
+  { ja: 'おにぎり', en: 'onigiri' },
+  { ja: '唐揚げ', en: 'karaage' },
+  { ja: 'たこ焼き', en: 'takoyaki' },
+  { ja: 'ラーメン', en: 'ra-menn' },
+  { ja: '焼きそば', en: 'yakisoba' },
+];
+
+for (let i = 0; i < questions.length; i++) {
+  let question = questions[i];
+  console.log('日本語: ' + question.ja + ', ローマ字: ' + question.en);
+}
+```
+
+HTMLに日本語を表示するラベル、ローマ字を表示するラベルの両方を用意し、問題を表示してみましょう。
+
 ## リトライボタンを追加する (★★)
 
 ## ベストスコアを保存する (★★)
