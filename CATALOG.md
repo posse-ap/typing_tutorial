@@ -403,6 +403,49 @@ let timer = setInterval(() => {
 
 ## タイマーゲージを追加する (★★★)
 
+タイマーゲージを追加することで、残り時間が一目でわかるようになります。
+
+HTMLにタイマーゲージを表示する要素を用意し、JavaScriptでその要素の幅を変更することで実装できます。
+
+```html
+<!-- index.html -->
+<div id="timer" class="bg-blue-500 h-4"></div>
+```
+
+```js
+// script.js
+let timerGauge = document.getElementById('timer');
+timerGauge.style.width = '100%'; // タイマーゲージの幅を100%にする
+```
+
+`setInterval()`でタイマーを実装している場合は、その中でタイマーゲージの幅を変更するようにしましょう。
+
+```js
+let time = 30; // タイマーの初期値
+let timer = setInterval(() => {
+  time--; // タイマーを1減らす
+  console.log(time);
+
+  // TODO: ここでタイマーゲージの幅を変更する
+
+  if (time === 0) {
+    clearInterval(timer); // タイマーを停止する
+  }
+}, 1000); // 1秒ごとに実行
+```
+
+<details>
+<summary>発展</summary>
+
+今は1秒ずつ更新していますが、タイマーゲージを滑らかに変化させるためには、
+
+- より細かい時間間隔で更新する
+- [requestAnimationFrame()](https://developer.mozilla.org/ja/docs/Web/API/Window/requestAnimationFrame)を使ってアニメーションさせる
+
+といった方法が考えられます。
+
+<details>
+
 ## 問題レベルを導入する (★★★)
 
 ゲームの難易度の概念を導入しましょう。
