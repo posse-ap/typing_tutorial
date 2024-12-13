@@ -12,6 +12,59 @@
 
 ## 背景に模様を追加する (★)
 
+背景を装飾すると、一気にテーマが明確になります。
+
+Tailwind CSSで作成してもいいですが、ここではCSSファイルを新たに作成して見ましょう。
+
+まず、`index.html`と同じ階層に`style.css`を作成します。
+
+そして、`index.html`の`<head>`の中で以下のように`style.css`を読み込みます。
+
+```html
+<!-- index.html -->
+<head>
+  <!-- 省略 -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+```
+
+たとえば、`body`タグに水玉模様を追加する場合は以下のように記述します。
+
+```css
+/* style.css */
+body {
+  background-image: radial-gradient(circle, #dbeafe 5px, transparent 5px),
+    radial-gradient(circle, #dbeafe 5px, transparent 5px);
+  background-position: 0 0, 15px 30px;
+  background-size: 30px 60px;
+}
+```
+
+これでも良いですが、CSSファイルでは自分でクラスを作ることが一般的です。ドット(`.`)を使ってクラスを指定します。
+
+```css
+/* style.css */
+.bg_dots {
+  background-image: radial-gradient(circle, #dbeafe 5px, transparent 5px),
+    radial-gradient(circle, #dbeafe 5px, transparent 5px);
+  background-position: 0 0, 15px 30px;
+  background-size: 30px 60px;
+}
+```
+
+```html
+<!-- index.html -->
+<body class="bg_dots">
+  <!-- 省略 -->
+</body>
+```
+
+きれいな背景パターンを提供しているサイトはたくさんあります。Googleなどで調べるか、以下のサイトを参考にしてみてください。
+
+- [CSSでストライプなどの背景パターンを作る方法](https://tamatuf.net/html-css/css-gradient-stripe/)
+- [【CSS】使える背景パターン、実装サンプル25選（コピペで簡単です）](https://125naroom.com/web/3737)
+- [コピペでできる！cssとhtmlのみで作るいい感じの背景パターン 12選](https://copypet.jp/2206/)
+
 ## 問題をランダムにする (★★)
 
 JavaScriptで乱数を生成することで、問題をランダムに表示することができます。
