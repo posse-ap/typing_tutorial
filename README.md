@@ -317,6 +317,7 @@ console.log(number);
 
 // 数値を1増やす
 // number = number + 1; と同じ
+// number++; と同じ
 number += 1;
 console.log(number);
 
