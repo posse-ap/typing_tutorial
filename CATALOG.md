@@ -193,6 +193,32 @@ HTMLに日本語を表示するラベル、ローマ字を表示するラベル�
 
 ## ベストスコアを保存する (★★)
 
+現在の実装では、ブラウザを閉じたりリロードするとスコアがリセットされてしまいます。
+
+これを解決するためには、スコアを保存する仕組みを導入する必要があります。
+
+`localStorage`を使うと、ブラウザにデータを保存することができます。
+
+```js
+localStorage.setItem('bestScore', 2); // データを保存
+let bestScore = localStorage.getItem('bestScore'); // データを取得
+console.log(bestScore); // 2
+```
+
+タイピングが終わったときに、現在のスコアとベストスコアを比較し、ベストスコアを更新するようにしましょう。
+
+```js
+let score = 5; // 現在のスコア
+let bestScore = localStorage.getItem('bestScore'); // ベストスコア
+
+// ベストスコアと現在のスコアを比較し、ベストスコアを更新
+if (score > bestScore) {
+  localStorage.setItem('bestScore', score);
+}
+```
+
+ベストスコアを表示するためには、HTMLにベストスコアを表示する要素を用意し、JavaScriptでその要素にベストスコアを表示するようにしましょう。
+
 ## 連続タイピング数を導入する (★★)
 
 ## タイピング速度を導入する (タイマー機能がある場合) (★★)
