@@ -381,6 +381,104 @@ input.addEventListener('keydown', (e) => {
 
 ## 音を追加する (★★★)
 
+テンプレートには以下の4種類の音を用意しています。
+
+- `ok.mp3`: 通常のタイピング音
+- `ng.mp3`: 不正解時のタイピング音
+- `complete.mp3`: 問題をクリアしたときの音
+- `game_end.mp3`: ゲームを終了したときの音
+
+これらの音を使って、タイピング時に音を鳴らすようにしていきます。
+
+また、ブラウザの仕様で、音声を再生するにはユーザーの操作 (音声再生ボタンのクリックなど) が必要です。HTML要素も併せて追加していきます。
+
+ここは難しいので、実装例を参考にしてみてください。
+
+<details>
+<summary>実装例</summary>
+
+```html
+<!-- index.html -->
+<button id="sound">Sound ON/OFF</button>
+```
+
+```js
+// script.js
+const soundToggleButton = document.getElementById('sound');
+
+// 音声ファイルの読み込み
+const okSoundBuffer = fetchSound('./sound/ok.mp3');
+const ngSoundBuffer = fetchSound('./sound/ng.mp3');
+const completeSoundBuffer = fetchSound('./sound/complete.mp3');
+const gameEndSoundBuffer = fetchSound('./sound/game_end.mp3');
+
+// 音声再生のための変数
+let isSoundOn = false;
+let audioCtx = null;
+let okSound = null;
+let ngSound = null;
+let completeSound = null;
+let gameEndSound = null;
+
+// 音声ファイルを読み込む処理を定義
+async function fetchSound(url) {
+  const response = await fetch(url);
+  return await response.arrayBuffer();
+}
+
+// 音声ON/OFFボタンをクリックしたときの処理を定義
+soundToggleButton.addEventListener('click', async () => {
+  // 音声ON/OFFの切り替え
+  isSoundOn = !isSoundOn;
+  if (isSoundOn && !audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    okSound = await audioCtx.decodeAudioData(await okSoundBuffer);
+    ngSound = await audioCtx.decodeAudioData(await ngSoundBuffer);
+    completeSound = await audioCtx.decodeAudioData(await completeSoundBuffer);
+    gameEndSound = await audioCtx.decodeAudioData(await gameEndSoundBuffer);
+  }
+});
+
+// 音を再生する処理を定義
+async function playSound(sound) {
+  // もし音声がOFFの場合は再生しない
+  if (!isSoundOn) {
+    return;
+  }
+
+  // 音声を再生
+  const source = audioCtx.createBufferSource();
+  source.buffer = sound;
+  source.connect(audioCtx.destination);
+  source.start();
+}
+```
+
+</details>
+
+ここで、`function playSound` など、処理を定義している箇所が複数あるのがわかると思います。
+
+これは`関数`といって、同じ処理を何度も使いたいときに便利な機能です。
+
+実際に音声を使うときは、以下のように使います。
+
+```js
+playSound(okSound); // 通常のタイピング音を再生
+
+playSound(ngSound); // 不正解時のタイピング音を再生
+
+playSound(completeSound); // 問題をクリアしたときの音を再生
+
+playSound(gameEndSound); // ゲームを終了したときの音を再生
+```
+
+これらの関数をどこで使うか、どのように使うかを考えながら実装してみましょう！
+
+また、好きな効果音に差し替えることもできます。以下のサイトなどを参考にしてみてください。
+
+- [効果音ラボ](https://soundeffect-lab.info/)
+
+
 ## タイマー機能を追加する (★★★)
 
 ここでは、30秒のタイマーを実装してみましょう。
