@@ -104,6 +104,27 @@ console.log(length); // 5
 - 不正解数が多いほどスコアが減る
 - 連続タイピング数が多いほどスコアの倍率が上がる
 
+## 結果をalertではなく画面に表示する (★)
+
+結果を`alert()`で表示するのは、あまり見栄えがよくありません。
+
+HTMLに結果を表示する要素を用意し、JavaScriptでその要素に結果を表示するようにしましょう。
+
+以下は、結果を表示するための要素を用意する例です。
+
+```html
+<!-- index.html -->
+<div id="result"></div>
+```
+
+```js
+// script.js
+let result = document.getElementById('result');
+result.innerText = `正解数: 5
+不正解数: 0
+正解率: 100%`;
+```
+
 ## 全体的なデザインを変更する (★★)
 
 ゲームの機能を増やすことも大事ですが、デザインもゲームの印象を大きく左右します。
@@ -357,8 +378,6 @@ input.addEventListener('keydown', (e) => {
 ```
 
 </details>
-
-## 結果をalertではなく画面に表示する (★★★)
 
 ## 音を追加する (★★★)
 
