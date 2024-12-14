@@ -598,9 +598,22 @@ let element = document.getElementById('example');
 console.log(element.innerText);
 ```
 
+`input`タグの入力欄の値を取得するには`innerText`のかわりに`value`を使います。
+
+```html
+<!-- index.html -->
+<input id="input" type="text" />
+```
+
+```js
+// script.js
+let input = document.getElementById('input');
+console.log(input.value);
+```
+
 #### HTML要素を変更する
 
-取得した要素のテキストを変更するには、`innerText`プロパティに新しい値を代入します。
+`p`タグなどの要素のテキストを変更するには、`innerText`プロパティに新しい値を代入します。
 
 ```js
 // script.js
@@ -609,6 +622,14 @@ element.innerText = 'こんばんは';
 ```
 
 このコードを実行すると、`こんにちは`というテキストが`こんばんは`に変わります。
+
+`input`タグの中身を変更する場合は`value`を使います。
+
+```js
+// script.js
+let input = document.getElementById('input');
+input.value = 'こんにちは';
+```
 
 #### CSSを変更する
 
