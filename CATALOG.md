@@ -542,7 +542,7 @@ let timer = setInterval(() => {
 
 といった方法が考えられます。
 
-<details>
+</details>
 
 ## 問題レベルを導入する (★★★)
 
